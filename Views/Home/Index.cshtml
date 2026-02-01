@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RETRO RACER - Un jeu de course rétro avec des effets CRT et une ambiance synthwave">
+    <title>RETRO RACER</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body>
+    <!-- Écran de chargement -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-container">
+            <div class="loading-animation">
+                <div class="loading-car"></div>
+                <div class="loading-road"></div>
+            </div>
+            <p class="loading-text">CHARGEMENT...</p>
+         
+        </div>
+    </div>
+
+    <!-- Overlay: écran de titre -->
+    <div id="titleScreen" class="overlay active">
+        <div class="title-container">
+            <div class="scanline-flicker"></div>
+            <p class="subtitle">— PRESENTS —</p>
+            <h1 class="title-main">RETRO<span class="highlight">RACER</span></h1>
+            <p class="title-year">© 1994 NEON SOFT INC.</p>
+            <div class="title-divider"></div>
+
+            <!-- Sélection du niveau -->
+            <div class="level-selection">
+                <h3 class="level-title">SÉLECTIONNEZ LE NIVEAU</h3>
+                <div class="level-options">
+                    <div class="level-option" data-level="easy">
+                        <div class="level-stars">★☆☆</div>
+                        <div class="level-name">FACILE</div>
+                        <div class="level-info">Objectif: 30 secondes<br>Vitesse lente</div>
+                    </div>
+                    <div class="level-option" data-level="medium">
+                        <div class="level-stars">★★☆</div>
+                        <div class="level-name">INTERMÉDIAIRE</div>
+                        <div class="level-info">Objectif: 45 secondes<br>Vitesse normale</div>
+                    </div>
+                    <div class="level-option" data-level="hard">
+                        <div class="level-stars">★★★</div>
+                        <div class="level-name">DIFFICILE</div>
+                        <div class="level-info">Objectif: 60 secondes<br>Vitesse rapide</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions de jeu -->
+            <div class="instructions-block">
+                <h3>COMMANDES</h3>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <span class="key">← →</span>
+                        <span>Direction</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">ESPACE</span>
+                        <span>Turbo</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">C</span>
+                        <span>Effet CRT</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">P</span>
+                        <span>Pause</span>
+                    </div>
+                </div>
+                <p class="game-objective">Évitez les voitures et survivez le plus longtemps possible !</p>
+            </div>
+
+            <!-- Sélection du mode -->
+            <div class="mode-selection">
+                <div class="mode-option" data-mode="classic">
+                    <span class="key">[1]</span> MODE CLASSIQUE
+                    <span class="desc">Survie - Pas de limite de temps</span>
+                </div>
+                <div class="mode-option" data-mode="arcade">
+                    <span class="key">[2]</span> MODE ARCADE
+                    <span class="desc">Temps limité - Score maximum</span>
+                </div>
+                <div class="mode-option" data-mode="challenge">
+                    <span class="key">[3]</span> MODE DÉFI
+                    <span class="desc">Atteignez l'objectif pour gagner</span>
+                </div>
+            </div>
+
+            <!-- Power-ups -->
+            <div class="controls-hint">
+                <span>POWER-UPS:</span> S=Bouclier | T=Ralenti | F=Carburant | +=Score
+            </div>
+
+            <p class="press-start">▶ APPUYEZ SUR LA TOUCHE DU MODE SOUHAITÉ ◀</p>
+        </div>
+    </div>
+
+    <!-- Overlay: Pause -->
+    <div id="pauseScreen" class="overlay">
+        <div class="pause-container">
+            <div class="scanline-flicker"></div>
+            <h2 class="pause-title">PAUSE</h2>
+            <div class="pause-stats">
+                <p>Temps: <span id="pauseTime">00:00</span></p>
+                <p>Score: <span id="pauseScore">00000</span></p>
+                <p>Vitesse: <span id="pauseSpeed">0 km/h</span></p>
+            </div>
+            <div class="pause-options">
+                <div class="pause-option" id="resumeBtn">▶ REPRENDRE (P)</div>
+                <div class="pause-option" id="restartBtn">↻ RECOMMENCER (R)</div>
+                <div class="pause-option" id="menuBtn">≡ MENU (M)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay: Victoire -->
+    <div id="winScreen" class="overlay">
+        <div class="win-container">
+            <div class="scanline-flicker"></div>
+            <h2 class="win-title">VICTOIRE !</h2>
+            <div class="win-stars">
+                <div class="star">★</div>
+                <div class="star">★</div>
+                <div class="star">★</div>
+            </div>
+            <p class="win-message" id="winMessage">Vous avez atteint l'objectif !</p>
+            <div class="win-stats">
+                <p>Temps total: <span id="winTime">00:00</span></p>
+                <p>Score final: <span id="winScore">00000</span></p>
+                <p>Voitures évitées: <span id="winAvoided">0</span></p>
+                <p>Vitesse max: <span id="winMaxSpeed">0 km/h</span></p>
+            </div>
+            <div class="win-actions">
+                <div class="win-action" id="nextLevelBtn">▶ NIVEAU SUIVANT</div>
+                <div class="win-action" id="winRestartBtn">↻ REJOUER</div>
+                <div class="win-action" id="winMenuBtn">≡ MENU</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay: Game Over -->
+    <div id="gameOverScreen" class="overlay">
+        <div class="gameover-container">
+            <div class="scanline-flicker"></div>
+            <h2 class="gameover-title">GAME<br />OVER</h2>
+            <p class="gameover-score">SCORE : <span id="finalScore">0</span></p>
+            <p class="gameover-best">MEILLEUR : <span id="bestScore">0</span></p>
+            <p class="gameover-time">TEMPS : <span id="finalTime">00:00</span></p>
+
+            <!-- Section progression -->
+            <div class="progress-section" id="progressSection">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">Progression vers l'objectif</p>
+            </div>
+
+            <p class="press-start">▶ ENTREE POUR REJOUER ◀</p>
+        </div>
+    </div>
+
+    <!-- HUD superposé sur le canvas -->
+    <div id="hud">
+        <div class="hud-left">
+            <div class="hud-item">
+                <span class="hud-label">SCORE</span>
+                <span id="scoreDisplay" class="hud-value">00000</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">TEMPS</span>
+                <span id="timeDisplay" class="hud-value">00:00</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">NIVEAU</span>
+                <span id="levelDisplay" class="hud-value">FACILE</span>
+            </div>
+        </div>
+
+        <div class="hud-center">
+            <div id="objectiveDisplay">
+                <div class="objective-progress">
+                    <div class="objective-bar">
+                        <div id="objectiveFill" class="objective-fill"></div>
+                    </div>
+                    <span id="objectiveText">0:00 / 0:30</span>
+                </div>
+            </div>
+            <div id="speedDisplay" class="speed-display">0 km/h</div>
+        </div>
+
+        <div class="hud-right">
+            <div class="hud-item">
+                <span class="hud-label">MEILLEUR</span>
+                <span id="bestDisplay" class="hud-value">00000</span>
+            </div>
+            <div class="hud-turbo">
+                <div class="turbo-label">TURBO</div>
+                <div class="turbo-bar-bg">
+                    <div id="turboBar" class="turbo-bar-fill"></div>
+                </div>
+                <div class="turbo-value" id="turboValue">100%</div>
+            </div>
+            <div id="activeEffects" class="active-effects"></div>
+        </div>
+    </div>
+
+    <!-- Canvas principal du jeu -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- CRT Overlay Effect -->
+    <div class="crt-overlay"></div>
+
+    <!-- Audio controls -->
+    <div class="audio-controls">
+        <button id="muteBtn" class="audio-btn">🔊</button>
+        <input type="range" id="volumeSlider" min="0" max="100" value="70">
+    </div>
+
+    <script src="~/js/game.js"></script>
+</body>
+</html>

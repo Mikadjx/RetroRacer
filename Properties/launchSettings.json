@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "RetroRacer": {
+      "commandName": "Project",
+      "dotnetRun": {
+        "withoutRestore": true
+      },
+      "launchBrowser": true,
+      "launchUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5085"
+    }
+  }
+}

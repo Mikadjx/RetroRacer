@@ -1,0 +1,4 @@
+wwwroot\css\style.css
+wwwroot\js\game.js
+D:\CESI\Formation\CESI_2025-26\Projet\GAMEJAM\RetroRacer\RetroRacer\wwwroot\css\style.css
+D:\CESI\Formation\CESI_2025-26\Projet\GAMEJAM\RetroRacer\RetroRacer\wwwroot\js\game.js
