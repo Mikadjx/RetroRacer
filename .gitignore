@@ -1,1 +1,26 @@
-".vs/" 
+# Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# ASP.NET Core
+appsettings.*.json
+launchSettings.json
+
+# NuGet
+[Nn]ackages/
+
+# OS files
+.DS_Store
+Thumbs.db
