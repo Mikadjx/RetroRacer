@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  retroracer:
+    build: .
+    container_name: retroracer
+    ports:
+      - "8080:8080"
+    volumes:
+      - retroracer-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  retroracer-data:
