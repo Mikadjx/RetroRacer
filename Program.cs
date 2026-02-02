@@ -6,12 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services
 builder.Services.AddControllersWithViews();
 
-// Add DbContext with SQLite
+// Add DbContext with SQL Server
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? "Data Source=retroracer.db";
+    ?? "Server=(localdb)\\mssqllocaldb;Database=RetroRacerDb;Trusted_Connection=True;MultipleActiveResultSets=true";
 
 builder.Services.AddDbContext<GameDbContext>(options =>
-    options.UseSqlite(connectionString));
+    options.UseSqlServer(connectionString));
 
 // Add CORS for API access
 builder.Services.AddCors(options =>
