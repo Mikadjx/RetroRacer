@@ -21,5 +21,6 @@ COPY --from=build /app .
 # Port exposé
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
+ENV ConnectionStrings__DefaultConnection="Data Source=/app/data/RetroRacer.db"
 
 ENTRYPOINT ["dotnet", "RetroRacer.dll"]
