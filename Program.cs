@@ -8,10 +8,10 @@ builder.Services.AddControllersWithViews();
 
 // Add DbContext with SQL Server
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? "Server=(localdb)\\mssqllocaldb;Database=RetroRacerDb;Trusted_Connection=True;MultipleActiveResultSets=true";
+    ?? "Data Source=RetroRacer.db";
 
 builder.Services.AddDbContext<GameDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlite(connectionString));
 
 // Add CORS for API access
 builder.Services.AddCors(options =>

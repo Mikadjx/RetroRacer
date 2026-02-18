@@ -19,8 +19,8 @@ public class GameDbContext : DbContext
             entity.Property(e => e.Initials).HasMaxLength(3).IsRequired();
             entity.Property(e => e.Score).IsRequired();
             entity.Property(e => e.GameMode).HasMaxLength(20);
-            entity.HasIndex(e => e.Score).IsDescending();
-            entity.HasIndex(e => new { e.GameMode, e.Score }).IsDescending();
+            entity.HasIndex(e => e.Score);
+            entity.HasIndex(e => new { e.GameMode, e.Score });
         });
     }
 }
